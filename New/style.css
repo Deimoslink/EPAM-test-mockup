@@ -1,3 +1,25 @@
+@font-face {
+	font-family: Pacifico; /* Имя шрифта */
+	src: url(fonts/Pacifico.ttf); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+	font-weight: normal; 
+	font-family: OpenSans; /* Имя шрифта */
+	src: url(fonts/OpenSans/OpenSans-Regular.ttf); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+	font-weight: bold;
+	font-family: OpenSans; /* Имя шрифта */
+	src: url(fonts/OpenSans/OpenSans-Bold.ttf); /* Путь к файлу со шрифтом */
+}
+
+.logo {
+	font-family: "Pacifico";
+	font-size: 30px;
+}
+
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -6,7 +28,7 @@
 
 body {
 	margin: 0;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: "OpenSans";
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
@@ -36,6 +58,10 @@ h2 {
 	padding: 0;
 }
 
+h3 {
+	font-weight: bold;
+}
+
 a {
   color: white;
   text-decoration: none;
@@ -43,7 +69,7 @@ a {
 
 a:hover,
 a:focus {
-  color: #23527c;
+  color: #4b9ec3;
   text-decoration: none;
 }
 
@@ -51,6 +77,10 @@ a:focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
+}
+
+button:focus {
+	outline: none;
 }
 
 ul,
@@ -75,13 +105,23 @@ header {
 header div {
 	float:left;
 	position:relative;
-	top:37px;
+	top:27px;
 }
 
 header nav {
 	float:right;
 	position:relative;
 	top:37px;
+}
+
+header nav a {
+	margin-left: 30px;
+	padding:5px;
+}
+
+header nav a:focus, header nav a:hover {
+	color: white;
+	border: 2px solid white;
 }
 
 header, .section-wrapper {
@@ -97,7 +137,7 @@ header, .section-wrapper {
 
 .sect1 {
 	height: 560px;
-	background: #0b292d url(pics/home.png) no-repeat center;
+	background: #fff url(pics/home.png) no-repeat center;
 	color:white;
 }
 
@@ -114,7 +154,12 @@ header, .section-wrapper {
 	border-radius: 5px;
 }
 
+.main-button:hover {
+	background-color: #4b9ec3;
+}
+
 .main-heading {
+	font-weight: bold;
 	position:relative;
 	top: 140px;
 }
@@ -209,15 +254,20 @@ header, .section-wrapper {
 
 .button {
 	color: #71b6d5;
-	height:50px;
+	height:35px;
 	width: 120px;
 	background-color: #fff;
 	font-weight:900;
 	text-transform: uppercase;
 	border: 2px solid #71b6d5;
 	border-radius: 5px;
+	margin-top: 10px;
 }
 
+.button:hover {
+	background-color: #71b6d5;
+	color: white;
+}
 
 .sect3-img-wrapper, .sect3-txt-wrapper {
 	float:left;
@@ -297,7 +347,7 @@ header, .section-wrapper {
     margin: 1px;
     text-indent: -999px;
     cursor: pointer;
-    background-color: black;
+    background-color: #e1e1e1;
     border: 1px solid #fff;
     border-radius: 10px;
 }
@@ -319,7 +369,7 @@ header, .section-wrapper {
 }
 
 .footer-col p {
-	color: white;
+	color: #c4c4c4;
 	padding-top: 0;
 	line-height: 20px;
 	vertical-align: middle;
@@ -330,7 +380,7 @@ header, .section-wrapper {
 	text-align: center;
 	color: #71b6d5;
 	font-size: 20px;
-	width:30px;
+	width:20px;
 	margin-right: 10px;
 	line-height: 20px;
 	vertical-align: middle;
@@ -341,8 +391,19 @@ header, .section-wrapper {
 	margin-bottom: 20px;
 }
 
-.tweet p {
-	margin-left: 40px;
+p.txt-white {
+	color: white;
+}
+
+p.tweet-text {
+	margin-left: 30px;
+	margin-bottom:0;
+}
+
+p.date {
+	margin-top: 5px;
+	margin-left: 30px;
+	color: #71b6d5;
 }
 
 .big-badge {
@@ -362,4 +423,28 @@ header, .section-wrapper {
 	position:relative;
 	top:5px;
 	margin:0
+}
+
+.small-badge {
+	height:30px;
+	width: 30px;
+	background-color: #2c3b42;
+	border-radius:50%;
+}
+
+.small-badge:hover {
+	background-color: #71b6d5;
+}
+
+.small-badge i {
+	text-align: center;
+	font-size: 16px;
+	color:white;
+	padding: 6px; 
+	margin:0;
+}
+
+.footer-links a {
+	display: inline-block;
+	margin-left: 5px;
 }
