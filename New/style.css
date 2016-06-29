@@ -1,23 +1,18 @@
 @font-face {
-	font-family: Pacifico; /* Имя шрифта */
-	src: url(fonts/Pacifico.ttf); /* Путь к файлу со шрифтом */
+	font-family: Pacifico;
+	src: url(fonts/Pacifico.ttf);
 }
 
 @font-face {
 	font-weight: normal; 
-	font-family: OpenSans; /* Имя шрифта */
-	src: url(fonts/OpenSans/OpenSans-Regular.ttf); /* Путь к файлу со шрифтом */
+	font-family: OpenSans;
+	src: url(fonts/OpenSans/OpenSans-Regular.ttf);
 }
 
 @font-face {
 	font-weight: bold;
-	font-family: OpenSans; /* Имя шрифта */
-	src: url(fonts/OpenSans/OpenSans-Bold.ttf); /* Путь к файлу со шрифтом */
-}
-
-.logo {
-	font-family: "Pacifico";
-	font-size: 30px;
+	font-family: OpenSans;
+	src: url(fonts/OpenSans/OpenSans-Bold.ttf);
 }
 
 * {
@@ -27,24 +22,16 @@
 }
 
 body {
-	margin: 0;
 	font-family: "OpenSans";
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #333;
-    min-width:1024px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333;
+	min-width:1024px;
 }
 
 body, h1, h2 {
 	margin:0;
 	padding:0;
-}
-
-h1, h2, h3{
-	font-family: inherit;
-    font-weight: 500;
-    line-height: 1.1;
-    color: inherit;
 }
 
 h1 {
@@ -53,9 +40,8 @@ h1 {
 }
 
 h2 {
+	font-weight: normal;
 	font-size: 30px;
-  	margin: 0;
-	padding: 0;
 }
 
 h3 {
@@ -63,43 +49,38 @@ h3 {
 }
 
 a {
-  color: white;
-  text-decoration: none;
+	color: white;
+	text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: #4b9ec3;
-  text-decoration: none;
+	color: #4b9ec3;
+	text-decoration: none;
 }
 
-a:focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
+button {
+	cursor: pointer;
 }
 
 button:focus {
 	outline: none;
 }
 
-ul,
 ol {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-ul {
-	list-style: none;
-}
-
-ol {
+	margin-top: 0;
+	margin-bottom: 10px;
 	padding-left:0px;
+}
+
+.section-border {
+	height:100%;
+	border-bottom: 1px solid #c2c2d6;
 }
 
 header {
 	height: 94px;
-	border-bottom: solid grey 1px;
+	border-bottom: solid #c2c2d6 1px;
 }
 
 header div {
@@ -130,15 +111,20 @@ header, .section-wrapper {
 	text-align: center;
 }
 
-.section-heading {
-	margin-top: -40px;
-	padding-bottom: 20px;
-}
-
 .sect1 {
 	height: 560px;
 	background: #fff url(pics/home.png) no-repeat center;
 	color:white;
+}
+
+.logo {
+	font-family: "Pacifico";
+	font-size: 30px;
+}
+
+.section-heading {
+	margin-top: -40px;
+	padding-bottom: 20px;
 }
 
 .main-button {
@@ -238,7 +224,7 @@ header, .section-wrapper {
 
 .image-wrapper {
 	width: 322px;
-	border: 1px solid grey;
+	border: 1px solid #c2c2d6;
 	height:100%;
 	border-radius:5px
 }
@@ -293,7 +279,7 @@ header, .section-wrapper {
 }
 
 .sect3a {
-	padding-top: 30px;
+	padding-top: 50px;
 	height: 355px;
 }
 
@@ -328,10 +314,26 @@ header, .section-wrapper {
 	height: 330px;
 }
 
+.line {
+	width:400px;
+	border-bottom:#c2c2d6 1px solid;
+	margin:auto;
+	margin-top: 40px;
+	margin-bottom:0px;
+}
+
+.sect5 ol.indicators {
+	margin-top: 20px;
+}
+
 .sect6 {
 	background-color: #273a43;
 	height: 350px;
 	color: #c3c3c3;
+}
+
+.sect6 i {
+	float: left;
 }
 
 .sect7 {
@@ -444,7 +446,43 @@ p.date {
 	margin:0;
 }
 
+.footer-links {
+	float:right;
+	position: relative;
+	top: 35px;
+}
+
 .footer-links a {
 	display: inline-block;
 	margin-left: 5px;
+}
+
+.input-group {
+	background-color:#71b6d5;
+	height:35px;
+	width:200px;
+	border-radius:5px;
+}
+
+.input-group input {
+	background-color:#172227;
+	border:none;
+	height:100%;
+	width:160px;
+	padding-left:10px;
+	color:white;
+}
+
+.input-group span {
+	vertical-align:middle;
+	text-align:center;
+	padding:5px;
+	cursor:pointer;
+	color:white;
+}
+
+.copyright-wrapper {
+	float:left;
+	position: relative;
+	top: 35px;
 }
