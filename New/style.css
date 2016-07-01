@@ -255,7 +255,7 @@ header, .section-wrapper {
   border-bottom: #c2c2d6 1px solid;
   margin: auto;
   margin-top: 40px;
-  margin-bottom: 0px; }
+  margin-bottom: 20px; }
 
 .sect5 ol.indicators {
   margin-top: 20px; }
@@ -396,3 +396,46 @@ p.date {
   float: left;
   position: relative;
   top: 35px; }
+
+
+.carousel-control {
+  position: absolute;
+  top: 160px;
+  bottom: 0;
+  left: 0;
+  width: 15%;
+  font-size: 40px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  background-color: rgba(0, 0, 0, 0);
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+
+.carousel-control.right, .carousel-control.left {
+  background-image: none;
+}
+
+
+.pagination {
+  margin:0;
+}
+
+.pagination > li:first-child > a, .pagination > li:last-child > a  {
+  border-radius: 50%;
+}
+
+.pagination > li > a {
+  float: left;
+  padding: 10px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #337ab7;
+  text-decoration: none;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: 20px;
+}
