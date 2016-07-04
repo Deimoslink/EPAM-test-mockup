@@ -4,219 +4,262 @@
 	<title>Bootstrap</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 	<header class="navbar navbar-fixed-top navbar-inverse">
-	
 		<div class="container">
-		    <div class="navbar-header" style="float:left">
-		      <a class="navbar-brand" href="#">Control Panel</a>
-		    </div>
-
-		    <ul class="nav navbar-nav navbar-right" style="float:right">
-		      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-		    </ul>
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Control Panel</a>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Admin
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Option 1</a></li>
+						<li><a href="#">Option 2</a></li>
+						<li><a href="#">Option 3</a></li> 
+					</ul>
+				</li>
+			</ul>
 		</div>
-
 	</header> 
 
 	<div class="container" style="padding-top:50px">
 		<div class="row">
 			<div class="col-md-3 col-sm-3 col-xs-12">
-				<h2>Toolbox</h2>
-				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat.</div>
+				<h2 class="border"><span class="glyphicon glyphicon-briefcase"></span> Toolbox</h2>
+				<ul class="nav">
+					<li><a href="#"><span class="glyphicon glyphicon-flash"></span> Alerts</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-link"></span> Links</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Reports</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-book"></span> Books</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-briefcase"></span> Tools</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-time"></span> Real-time</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-plus"></span> Advanced</a></li>
+				</ul>
+				<div class="line"></div>
 			</div>
 
 			<div class="col-md-9 col-sm-9 col-xs-12">
 				<div class="row">
-					<h2>Dashboard</h2>
+					<h2 id="dashboard-wide" class="border"> <span class="glyphicon glyphicon-dashboard"></span> Dashboard</h2>
 					<div class="col-md-7 col-sm-12 col-xs-12">
-					<div class="well">Inbox</div>
-
-
-<div class="panel panel-default">
-  <div class="panel-heading">Processing</div>
-  <div class="panel-body">
-
-
-<div class="progress">
-  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
-  aria-valuemin="0" aria-valuemax="100" style="width:40%">
-    40% Complete (success)
-  </div>
-</div>
-
-<div class="progress">
-  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
-  aria-valuemin="0" aria-valuemax="100" style="width:60%">
-    60% Complete (warning)
-  </div>
-</div>
-
-<div class="progress">
-  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70"
-  aria-valuemin="0" aria-valuemax="100" style="width:70%">
-    70% Complete (danger)
-  </div>
-</div>
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
+						<h2 id="dashboard-small" class="border"> <span class="glyphicon glyphicon-dashboard"></span> Dashboard</h2>
+						<div class="well">Inbox Messages
+							<span class="badge" style="float:right">5</span>
+						</div>
+						<div class="line border"></div>
+						<div class="panel panel-default">
+							<div class="panel-heading">Processing Status</div>
+							<div class="panel-body">
+								Complete
+								<div class="progress">
+									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+									aria-valuemin="0" aria-valuemax="100" style="width:80%"></div>
+								</div>
+								In Progress
+								<div class="progress">
+									<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
+									aria-valuemin="0" aria-valuemax="100" style="width:20%"></div>
+								</div>
+								At Risk
+								<div class="progress">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70"
+									aria-valuemin="0" aria-valuemax="100" style="width:70%"></div>
+								</div>
+							</div>
+						</div>
 					</div>
+				
 					<div class="col-md-5 col-sm-12 col-xs-12">
-					<h2>Pills</h2>
-						<div class="btn-group ">
-  <button type="button" class="btn btn-primary">Apple</button>
-  <button type="button" class="btn btn-primary">Samsung</button>
-  <button type="button" class="btn btn-primary">Sony</button>
-   <button type="button" class="btn btn-primary">Sony</button>
-</div>
+						<ul class="nav dashboard-list">
+							<li><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-heart"></span></a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-comment"></span><span class="badge badge-notify">3</span></a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
+						</ul>
+						<div class="line border" style="margin-top:10px;margin-bottom:10px"></div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab adipisci, sint magni asperiores deserunt et dicta, facilis, aut rem itaque laborum placeat atque? Dolorem, impedit!</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptate, nihil culpa accusamus. Ab adipisci, sint magni asperiores deserunt et dicta. Dolorem, impedit!</p>
+						<div class="line border"></div>
+						<div class="btn-group dashboard-btn-group">
+							<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span><p>Service</p></button>
+							<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-cloud"></span><p>Cloud</p></button>
+							<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-cog"></span><p>Tools</p></button>
+							<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-question-sign"></span><p>Help</p></button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<a href="#"><h3 class="h3-reports"><span class="glyphicon glyphicon-list-alt"></span> Reports</h3></a>
+
+		<div class="row">
+			<div class="col-md-8 col-xs-12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Visits</th>
+							<th>ROI</th>
+							<th>Source</th>
+							<th>Description and Notes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>45</td>
+							<td>2.45%</td>
+							<td>Direct</td>
+							<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis rem cum beatae temporibus cumque minima, vero optio magni delectus voluptates iste, aspernatur! Voluptatibus autem aut nulla blanditiis, officia amet, cumque.</td>
+						</tr>
+						<tr>
+							<td>289</td>
+							<td>56.2%</td>
+							<td>Referral</td>
+							<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis rem cum beatae temporibus cumque minima, vero optio magni delectus voluptates iste, aspernatur! Voluptatibus autem aut nulla blanditiis, officia amet, cumque.</td>
+						</tr>
+						<tr>
+							<td>98</td>
+							<td>25%</td>
+							<td>Type</td>
+							<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis rem cum beatae temporibus cumque minima, vero optio magni delectus voluptates iste, aspernatur! Voluptatibus autem aut nulla blanditiis, officia amet, cumque.</td>
+						</tr>
+						<tr>
+							<td>109</td>
+							<td>8%</td>
+							<td>--</td>
+							<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis rem cum beatae temporibus cumque minima, vero optio magni delectus voluptates iste, aspernatur! Voluptatibus autem aut nulla blanditiis, officia amet, cumque.</td>
+						</tr>
+						<tr>
+							<td>34</td>
+							<td>14%</td>
+							<td>--</td>
+							<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis rem cum beatae temporibus cumque minima, vero optio magni delectus voluptates iste, aspernatur! Voluptatibus autem aut nulla blanditiis, officia amet, cumque.</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="line border"></div>
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#home">Profile</a></li>
+					<li><a data-toggle="tab" href="#menu1">Messages</a></li>
+					<li><a data-toggle="tab" href="#menu2">Settings</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="home" class="tab-pane fade in active">
+						<h3><span class="glyphicon glyphicon-user"></span> </h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere rerum hic numquam magnam aspernatur possimus at ipsa nobis quos pariatur maiores velit, quia quod qui, natus soluta eligendi voluptatibus distinctio?</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, similique. Dolorum nemo corporis amet, pariatur veritatis maiores molestiae, soluta laboriosam praesentium iure quisquam, asperiores provident voluptatum earum est facilis et.</p>
+					</div>
+					<div id="menu1" class="tab-pane fade">
+						<h3>Messages</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere rerum hic numquam magnam aspernatur possimus at ipsa nobis quos pariatur maiores velit, quia quod qui, natus soluta eligendi voluptatibus distinctio?</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, similique. Dolorum nemo corporis amet, pariatur veritatis maiores molestiae, soluta laboriosam praesentium iure quisquam, asperiores provident voluptatum earum est facilis et.</p>
+					</div>
+					<div id="menu2" class="tab-pane fade">
+						<h3>Settings</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere rerum hic numquam magnam aspernatur possimus at ipsa nobis quos pariatur maiores velit, quia quod qui, natus soluta eligendi voluptatibus distinctio?</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, similique. Dolorum nemo corporis amet, pariatur veritatis maiores molestiae, soluta laboriosam praesentium iure quisquam, asperiores provident voluptatum earum est facilis et.</p>
+					</div>
+				</div>
+				<div class="line border"></div>
+				<div class="panel panel-default">
+					<div class="panel-heading">New Requests</div>
+					<div class="panel-body">
+						<div class="list-group">
+							<a href="#" class="list-group-item active">Hosting virtual mailbox server.</a>
+							<a href="#" class="list-group-item">Dedicadet server doesn't respond.</a>
+							<a href="#" class="list-group-item">RHEL 6 install on new desktop.</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="alert alert-info fade in">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>
+					Please remember to <strong>Logout</strong> for classified security.
+				</div>
+			</div>
+
+			<div class="col-md-4 col-xs-12">
+				<ul class="nav">
+					<li><a href="#"><span class="glyphicon glyphicon-list"></span> Layouts & Templates</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-briefcase"></span> Toolbox</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-link"></span> Widgets</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Reports</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-book"></span> Pages</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-star"></span> Social Media</a></li>
+				</ul>
+				<div class="line border"></div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">Submit Request
+						<span class="glyphicon glyphicon-wrench panel-heading-symbol"></span>
+					</div>
+					<div class="panel-body">
+						<form role="form">
+							<div class="form-group">
+								<label for="email">Name</label>
+								<input type="email" class="form-control" placeholder="Enter Name">
+							</div>
+							<div class="form-group">
+								<label for="pwd">Title</label>
+								<input type="password" class="form-control" placeholder="Password">
+							</div>
+							<div class="form-group">
+								<label for="comment">Details</label>
+								<textarea class="form-control" rows="4"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="sel1">Select</label>
+								<select class="form-control">
+									<option>General Question</option>
+									<option>Special Question</option>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-primary">Post</button>
+						</form>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">Engagement</div>
+					<div class="panel-body">
+						<ul class="engagement-list">
+							<li>
+								<div>
+									<p>80-80</p>
+								</div>
+							</li>
+							<li>
+								<div>
+									<p>80-80</p>
+								</div>
+							</li>
+							<li>
+								<div>
+									<p>80-80</p>
+								</div>
+							</li>																				
+						</ul>
 					</div>
 				</div>
 
 			</div>
 		</div>
-
-		<h3>Reports</h3>
-		<div class="row">
-
-			<div class="col-md-8 col-xs-12">
-
-
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
-    </tbody>
-  </table>
-
-
-
-
-
-
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-  <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-  <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-</ul>
-
-<div class="tab-content">
-  <div id="home" class="tab-pane fade in active">
-    <h3>HOME</h3>
-    <p>Some content.</p>
-  </div>
-  <div id="menu1" class="tab-pane fade">
-    <h3>Menu 1</h3>
-    <p>Some content in menu 1.</p>
-  </div>
-  <div id="menu2" class="tab-pane fade">
-    <h3>Menu 2</h3>
-    <p>Some content in menu 2.</p>
-  </div>
-</div>
-
-
-
-
-				<div class="panel panel-default">
-  <div class="panel-heading">Panel Heading</div>
-  <div class="panel-body">
-  	<div class="list-group">
-  <a href="#" class="list-group-item active">First item</a>
-  <a href="#" class="list-group-item">Second item</a>
-  <a href="#" class="list-group-item">Third item</a>
-</div>
-
-</div>
-</div>
-
-				<div class="alert alert-info">
-  <strong>Info!</strong> Indicates a neutral informative change or action.
-</div>
-			</div>
-
-			<div class="col-md-4 col-xs-12">
-				
-
-
-
-<div class="panel panel-default">
-  <div class="panel-heading">Panel Heading</div>
-  <div class="panel-body">
-
-				<form role="form">
-  <div class="form-group">
-    <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="email">
-  </div>
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd">
-  </div>
-  <div class="checkbox">
-    <label><input type="checkbox"> Remember me</label>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
-</div>
-</div>
-
-
-
-
-
-
-				<h2>Engagement</h2>
-				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</div>
-			</div>
-		</div>
 	</div>
 
-	<footer class="bg-info" style="margin-top:20px;">
-	
-		<div class="container" style="text-align:center">
-			<h3>Writing!</h3>
+	<footer>
+		<div class="container">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <a href="#">Ducimus laudantium</a> ipsam perspiciatis voluptatem distinctio consectetur magnam ut rerum, quaerat, in aliquid?</p>
 		</div>
-
 	</footer> 
-
 
 </body>
 </html>

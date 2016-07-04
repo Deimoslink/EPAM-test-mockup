@@ -1,0 +1,159 @@
+footer {
+	margin-top:20px;
+	background-color:#f5f5f5;
+}
+
+footer div.container {
+	text-align:center;
+}
+
+footer p {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.navbar-header {
+	float:left;
+}
+
+.navbar-right {
+	float: right;
+}
+
+h2 {
+	margin-bottom:20px
+}
+
+h2 span {
+	font-size:20px;
+}
+
+.border {
+	border-bottom:1px solid #dcdcdc;
+}
+
+h2.border {
+	padding-bottom:10px;
+}
+
+.line {
+	width:100%;
+	margin:20px 0;	
+}
+
+.dashboard-list, .dashboard-btn-group {
+	display:inline-block;
+	width:100%;
+}
+
+.panel-heading-symbol {
+	float:right;
+	font-size:18px;
+	padding:0px;
+}
+
+.dashboard-list li {
+	float:left;
+	width:20%;
+	text-align:center;
+} 
+
+.dashboard-btn-group button {
+	float:left;
+	width:25%;
+	text-align:center;
+	padding:10px 0 10px;
+}
+
+.dashboard-btn-group p {
+	margin:0;
+}
+
+.engagement-list {
+	list-style:none;
+	text-align:center;
+	padding:0;
+	margin:0;
+}
+
+.engagement-list li {
+	list-style:none;
+	display:inline-block;
+	padding:0 15px 0;
+}
+
+.engagement-list li:first-child {
+	padding-left:0;
+}
+
+.engagement-list li:last-child {
+	padding-right:0;
+}
+
+.engagement-list li div {
+	height:80px;
+	width:80px;
+	background-color:#f1f1f1;
+	border-radius:50%;
+	text-align:center;
+}
+
+.engagement-list li div:hover {
+	background-color:#c5c5c5;
+	color:#fff;
+}
+
+.engagement-list li div p {
+	vertical-align:middle;
+	line-height:80px;
+}
+
+.badge-notify {
+	padding:2px;
+	background:red;
+	position:relative;
+	width:12px;
+	height:12px;
+	top:-10px;
+	left:-5px;
+	font-size:8px;
+}
+
+/*Небольшой костыль для плывущего уведомления*/
+
+@media (max-width:1199px) {
+	.badge-notify {
+		top:-30px;
+		left:10px;
+	}
+}
+
+@media (max-width:991px) {
+	.badge-notify {
+		top:-10px;
+		left:-5px;
+	}
+}
+
+.h3-reports {
+	border-bottom:1px solid #dcdcdc;
+	border-top:1px solid #dcdcdc;
+	padding: 15px 0 15px;
+	font-size:16px;
+	font-weight:600;
+}
+
+/*Костыль для линии под заголовком Dashboard*/
+
+#dashboard-small {
+	display:none;
+}
+
+@media (max-width:768px) {
+	#dashboard-small {
+		display:block;
+	}
+	#dashboard-wide {
+		display:none;
+	}
+}
