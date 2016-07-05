@@ -157,3 +157,7 @@ h2.border {
 		display:none;
 	}
 }
+
+.mobile-fix span {
+	padding-right: 20px;
+}
