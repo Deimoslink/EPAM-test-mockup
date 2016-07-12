@@ -1,0 +1,27 @@
+body {
+  color:#333;
+}
+
+#calendar {
+  font: monospace;
+  line-height: 1.2em;
+  font-size: 15px;
+  text-align: center;
+}
+
+#calendar thead tr:last-child { /*Дни недели*/
+  font-size: small;
+  color: black;
+}
+
+#calendar tbody td:nth-child(n+6) { /*Суббота и воскресенье*/
+  color: red;
+}
+
+.today {
+  outline: 3px solid red;
+}
+
+.blur {
+  color: #bbb !important;
+}
