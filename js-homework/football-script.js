@@ -2,13 +2,26 @@ function startClock() {
     setInterval(function() {
 
 		var date = new Date();
-		var football = new Date(2018, 6, 15);
+		var football = new Date(2017, 6, 21);
 		var difference = football-date;
+		if (difference < 0) {console.log("Incorrect dates!");return false;}
 		var timeLeft = new Date(difference);
+		var MonthsCorrect = 0;
+
+		var DaysThisMonth = new Date(date.getFullYear(),date.getMonth()+1,0).getDate(); //Узнаем, сколько дней в текущем месяце
+		var Days = football.getDate() - date.getDate();
+
+		if (Days < 0) {
+			Days = DaysThisMonth - date.getDate() + football.getDate();
+			MonthsCorrect = -1;
+		} 
 
 		var Years = football.getFullYear() - date.getFullYear();
+		
 		var Months = football.getMonth() - date.getMonth();
-		var Days = football.getDate() - date.getDate();
+		Months = Months += MonthsCorrect;
+		if (Months < 0) { Years --; Months = 12 - Math.abs(Months);}
+
 		var Hours = timeLeft.getHours();
 		var Minutes = timeLeft.getMinutes();
 		var Seconds = timeLeft.getSeconds();
@@ -27,13 +40,6 @@ function startClock() {
 
 		var patternCase1 = new RegExp("^1$|([2-9]+1$)");
 		var patternCase2 = new RegExp("^[2-4]$|([2-9]+[2-4]$)");
-
-		// array.forEach(function(item, i) {
-		// 	if (patternCase1.test(item)) {console.log(item+" "+case1[i])}
-		//     else {if (patternCase2.test(item)) {console.log(item+" "+case2[i])}
-		//         else {console.log(item+" "+case3[i])}
-		//     }
-		// });
 
 		array.forEach(function(item, i) {
 			if (patternCase1.test(item)) {
