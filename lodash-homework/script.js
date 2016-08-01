@@ -31,29 +31,30 @@ var Table = [
 	}
 ];
 
+
 var columns = _.keysIn(Table[0]);
+var addButton = document.getElementById('add');
+var toggleButton = document.getElementById('toggle');
+var sortButton = document.getElementById('sort');
+var sortToggle = false;
+
 function render () {
 	var addTable = _.template(document.getElementById('template').innerHTML);		
 	document.getElementById('app').innerHTML = addTable({ keys: columns, items: Table});
-
-
-var removeButtons = document.getElementsByClassName("remove");
-
-for (var i = 0; i < removeButtons.length; i++) {
-    removeButtons[i].addEventListener("click", doThis);
-    removeButtons[i].setAttribute("id", i);
-}
-
+	var removeButtons = document.getElementsByClassName("remove");
+	for (var i = 0; i < removeButtons.length; i++) {
+		removeButtons[i].addEventListener("click", removeRow);
+		removeButtons[i].setAttribute("id", i);
+	}
 };
 
 render();
 
-var button = document.getElementById('add');
-button.onclick = function() {
+addButton.onclick = function() {
 	var newCity = document.getElementById("city").value;
 	var newStreet = document.getElementById("street").value;
 	var newHouse = document.getElementById("house").value;
-	var newId = Table.length + 1;
+	var newId = Table[Table.length - 1].id + 1;
 	var newObj = {
 		id: newId,
 		city: newCity,
@@ -62,17 +63,39 @@ button.onclick = function() {
 	}
 	Table.push(newObj);
 	render();
+	console.log(Table.length);
 }
 
-
-function doThis (event) {
+function removeRow (event) {
 	var index = event.target.id;
 	Table.splice(index,1);
 	render();
 };
 
-var toggle = document.getElementById("toggle");
-toggle.onclick = function() {
-	document.getElementsByTagName('*').style.color = 'red';
+toggleButton.onclick = function() {
+	var len = document.querySelectorAll("td").length / 5;
+	document.querySelectorAll("th")[0].style.visibility === "hidden" ? document.querySelectorAll("th")[0].style.visibility = "visible" : document.querySelectorAll("th")[0].style.visibility = "hidden";
+	for (var i = 0; i < len; i++) {
+		document.querySelectorAll("td")[i*5].style.visibility === "hidden" ? document.querySelectorAll("td")[i*5].style.visibility = "visible" : document.querySelectorAll("td")[i*5].style.visibility = "hidden";;
+	}
 }
 
+sortButton.onclick = function () {
+	sortToggle ? sortByDesc() : sortByAsc();
+};
+
+	function sortByAsc () {
+		Table = Table.sort(function(obj1, obj2) {
+			return obj1.house - obj2.house;
+		});
+		sortToggle = true;
+		render();
+	};
+
+	function sortByDesc () {
+		Table = Table.sort(function(obj1, obj2) {
+			return obj2.house - obj1.house
+		});
+		sortToggle = false;
+		render();
+	};
