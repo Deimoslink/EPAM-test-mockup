@@ -8,7 +8,11 @@ $(document).ready(function() {
         if (searchInput.val().length >= 3) {
             var searchQuery = "https://api.github.com/search/repositories?q=" + searchInput.val();
             $.get(searchQuery, function(data, status){
-                var items = data.items;
+                //var items = data.items;
+                var items = [];
+                items[0] = data.items[0];
+                items[1] = data.items[1];
+                items[2] = data.items[2];
                    resultsField.html( compiled({ 'inputArray': items }));
             });
         };
