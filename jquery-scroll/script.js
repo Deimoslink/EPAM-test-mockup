@@ -50,6 +50,7 @@ $(document).ready(function(){
 	};
 
 	var currentIndex = 0;
+	var autoSlide = true;
 
 	$(".slide:first, .slider-nav-list li:first").addClass("active");
 	$("#sliderNext").on('click',nextSlide);
@@ -60,12 +61,18 @@ $(document).ready(function(){
 		render();
 	});
 
-	var autoScroll = setInterval(nextSlide, 1000);	
-	
+	var autoSlide = setInterval(function(){ nextSlide() }, 1000);
+
+	function stopAutoSlide() {
+	    clearInterval(autoSlide);
+	}
 
 	$('#slider').on('mouseenter',function() {
-		console.log("test");
-		clearInterval(autoScroll);
+		stopAutoSlide();
+	});
+
+	$('#slider').on('mouseleave',function() {
+		autoSlide = setInterval(function(){ nextSlide() }, 1000);
 	});
 
 });
