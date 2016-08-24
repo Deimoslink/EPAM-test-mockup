@@ -13,13 +13,21 @@
 	white-space: nowrap;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3f7c4a779fa304a5538111e2f6704f631dbb0cfa
 .slide {
 	display: inline-block;
 }
 
 .slide.active {
 	display: inline-block;
+<<<<<<< HEAD
 	transform:translate(-200px);
+=======
+/*	transform:translate(-200px);*/
+>>>>>>> 3f7c4a779fa304a5538111e2f6704f631dbb0cfa
 }
 
 img {

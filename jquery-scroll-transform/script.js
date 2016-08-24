@@ -31,6 +31,10 @@ $(document).ready(function(){
 	function render () {
 		$(".slide, .slider-nav-list li").removeClass("active");
 		$(".slide:eq("+currentIndex+"), .slider-nav-list li:eq("+currentIndex+")").addClass("active");
+<<<<<<< HEAD
+=======
+		$('.slider-inner').css('transform','translate('+(-960*currentIndex)+'px)');
+>>>>>>> 3f7c4a779fa304a5538111e2f6704f631dbb0cfa
 	};
 
 	function nextSlide (){
