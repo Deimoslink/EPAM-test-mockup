@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bootstrap</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="style.css">
+<!-- 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+
+	<div class="col-md-8" style="margin:20px;">
+		<div class="btn-group" style="padding:20px;">
+			<button type="button" class="btn btn-primary" ng-click="add">Add</button>
+		</div>
+		<input type="date" name="" placeholder="date" class="form-control" style="width:200px; display:inline" />
+		<input type="text" name="" placeholder="name" class="form-control" style="width:200px; display:inline" />
+
+
+		<table class="table table-bordered" ng-if="editing === undefined">
+			<thead>
+				<tr><th>Date</th><th>Name</th><th>Action</th></tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in myArray" >
+					<td>{{item.date}}</td>
+					<td>{{item.name}}</td>
+					<td>
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary btn-xs" ng-click="edit(item)">Edit</button>
+						 	<button type="button" class="btn btn-primary btn-xs" ng-click="delete(item)">Delete</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<ng-form style="display: block; width:300px" class="well" ng-if="editing !== undefined">
+			<input ng-model="editing.date" type="date" name="" placeholder="date" class="form-control" style="margin-top:10px" />
+			<input ng-model="editing.name" type="text" name="" placeholder="name" class="form-control" style="margin-top:10px" />
+			<div class="btn-group" style="margin-top:10px">
+				<button type="button" class="btn btn-success btn-xs" ng-click="save()">Save</button>
+				<button type="button" class="btn btn-danger btn-xs" ng-click="cancel()">Cancel</button>
+			</div>
+		</ng-form>
+	</div>
+
+
+</div>
+
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('myCtrl', function($scope) {
+		$scope.myArray = [
+			{date: "today", name: "some name"},
+			{date: "08/24/2016", name: "meeting"},
+			{date: "08/25/2016", name: "classes"},
+			{date: "08/26/2016", name: "date"},
+			{date: "08/27/2016", name: "appointment"},
+			{date: "08/28/2016", name: "doctor"},
+			{date: "08/29/2016", name: "birthday"},
+			{date: "08/30/2016", name: "deadline"},
+			{date: "08/31/2016", name: "wedding"},
+			{date: "09/01/2016", name: "concert"},
+		];
+		$scope.add = function () {
+
+		};
+
+		$scope.editing = undefined;
+		$scope.current = undefined;
+
+		$scope.save = function () {
+			$scope.editing = angular.copy($scope.editing, $scope.current);
+			$scope.editing = undefined;
+		};
+		$scope.cancel = function () {
+			$scope.editing = undefined;
+		};
+		$scope.edit = function (x) {
+			$scope.current = x;
+			$scope.editing = {
+				name: x.name,
+				date: x.date
+			}
+		};
+		$scope.delete = function (x) {
+				  var index = $scope.myArray.indexOf(x);
+				  $scope.myArray.splice(index, 1);     
+		};
+	});
+
+
+	/*
+	$http
+	валидация
+	full day add style
+	name search
+	sorting
+	scroll
+	firebase
+
+
+	*/
+</script>
+</body>
+</html>
+
+
