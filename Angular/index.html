@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 	<title>Bootstrap</title>
@@ -9,6 +10,7 @@
 <!-- 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script data-require="angular-ui-bootstrap@0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
 </head>
 <body>
 
@@ -43,6 +45,8 @@
 			</tbody>
 		</table>
 
+		<div data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true"></div>
+
 		<ng-form style="display: block; width:300px" class="well" ng-if="editing !== undefined">
 			<input ng-model="editing.date" required type="date" name="" placeholder="date" class="form-control" style="margin-top:10px" />
 			<input ng-model="editing.name" required type="text" name="" placeholder="name" class="form-control" style="margin-top:10px" />
@@ -57,7 +61,40 @@
 </div>
 
 <script>
-	var app = angular.module('myApp', []);
+
+
+
+// todos.controller('TodoController', function($scope) {
+//    $scope.filteredTodos = []
+//   ,$scope.currentPage = 1
+//   ,$scope.numPerPage = 10
+//   ,$scope.maxSize = 5;
+  
+//   $scope.makeTodos = function() {
+//     $scope.todos = [];
+//     for (i=1;i<=1000;i++) {
+//       $scope.todos.push({ text:'todo '+i, done:false});
+//     }
+//   };
+//   $scope.makeTodos(); 
+  
+//   $scope.numPages = function () {
+//     return Math.ceil($scope.todos.length / $scope.numPerPage);
+//   };
+  
+//   $scope.$watch('currentPage + numPerPage', function() {
+//     var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+//     , end = begin + $scope.numPerPage;
+    
+//     $scope.filteredTodos = $scope.todos.slice(begin, end);
+//   });
+// });
+
+
+
+
+
+	var app = angular.module('myApp', ['ui.bootstrap']);
 	app.controller('myCtrl', function($scope) {
 		$scope.sorting = {date: false, name: false};
 		$scope.newtodo = {};
