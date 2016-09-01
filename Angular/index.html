@@ -6,35 +6,36 @@
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-<!-- 	<link rel="stylesheet" href="style.css"> -->
-<!-- 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-	<script data-require="angular-ui-bootstrap@0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
 </head>
 <body>
 
 <div ng-app="myApp" ng-controller="myCtrl">
 
-
 	<div class="col-md-8" style="margin:20px;">
-
 		<form name="addUserForm">
 			<div class="btn-group" style="padding:20px;">
 				<button type="button" class="btn btn-primary" ng-click="add()" ng-disabled="!addUserForm.$valid">Add</button>
 			</div>
 			<input ng-model="newtodo.date" required type="date" name="" placeholder="date" class="form-control" style="width:200px; display:inline" />
-			<input ng-model="newtodo.name" required type="text" name="" placeholder="name" class="form-control" style="width:200px; display:inline" />
+			<input ng-model="newtodo.user" required type="text" name="" placeholder="user" class="form-control" style="width:200px; display:inline" />
 		</form>
+
+		<p>Search for the needed result:</p>
+		<input type="text" ng-model="test" class="form-control" style="width:200px; display:inline; margin-bottom:20px">
 
 		<table class="table table-bordered" ng-if="editing === undefined">
 			<thead>
-				<tr><th ng-click="sortByNameAsc('date')">Date</th><th ng-click="sortByNameAsc('name')">Name</th><th>Action</th></tr>
+				<tr><th ng-click="sortBy('date')">Date</th>
+					<th ng-click="sortBy('user')">User</th>
+					<th>Status</th>
+					<th>Action</th></tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="item in myArray" >
-					<td>{{item.date | date: 'dd/MM/yyyy'}}</td>
-					<td>{{item.name}}</td>
+				<tr ng-repeat="item in myArray | filter: test | orderBy:myOrderBy" >
+					<td>{{item.date | date: 'dd/MM/yyyy' }}</td>
+					<td>{{item.user }}</td>
+					<td>{{item.status }}</td>
 					<td>
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary btn-xs" ng-click="edit(item)">Edit</button>
@@ -45,11 +46,9 @@
 			</tbody>
 		</table>
 
-		<div data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true"></div>
-
 		<ng-form style="display: block; width:300px" class="well" ng-if="editing !== undefined">
 			<input ng-model="editing.date" required type="date" name="" placeholder="date" class="form-control" style="margin-top:10px" />
-			<input ng-model="editing.name" required type="text" name="" placeholder="name" class="form-control" style="margin-top:10px" />
+			<input ng-model="editing.user" required type="text" name="" placeholder="user" class="form-control" style="margin-top:10px" />
 			<div class="btn-group" style="margin-top:10px">
 				<button type="button" class="btn btn-success btn-xs" ng-click="save()">Save</button>
 				<button type="button" class="btn btn-danger btn-xs" ng-click="cancel()">Cancel</button>
@@ -63,44 +62,33 @@
 <script>
 
 
+function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
 
-// todos.controller('TodoController', function($scope) {
-//    $scope.filteredTodos = []
-//   ,$scope.currentPage = 1
-//   ,$scope.numPerPage = 10
-//   ,$scope.maxSize = 5;
-  
-//   $scope.makeTodos = function() {
-//     $scope.todos = [];
-//     for (i=1;i<=1000;i++) {
-//       $scope.todos.push({ text:'todo '+i, done:false});
-//     }
-//   };
-//   $scope.makeTodos(); 
-  
-//   $scope.numPages = function () {
-//     return Math.ceil($scope.todos.length / $scope.numPerPage);
-//   };
-  
-//   $scope.$watch('currentPage + numPerPage', function() {
-//     var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-//     , end = begin + $scope.numPerPage;
-    
-//     $scope.filteredTodos = $scope.todos.slice(begin, end);
-//   });
-// });
+function makeid() {
+	var text = "";
+	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+	for( var i=0; i < 5; i++ )
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	return text;
+}
 
+statusArray = ['todo', 'in progress', 'partitialy done', 'done'];
+randomDates = [];
 
+for (var i = 0; i < 10; i++) {
+	var rand = statusArray[Math.floor(Math.random() * statusArray.length)];
+	randomDates.push({date: randomDate(new Date(2012, 0, 1), new Date()), user: makeid(), status: rand});
+}
 
+console.log(randomDates);
 
-	var app = angular.module('myApp', ['ui.bootstrap']);
+	var app = angular.module('myApp', []);
 	app.controller('myCtrl', function($scope) {
-		$scope.sorting = {date: false, name: false};
 		$scope.newtodo = {};
-		$scope.myArray = [
-			{date: new Date(), name: "meeting"}
-		];
+		$scope.myArray = randomDates;
 		$scope.add = function () {
 			$scope.myArray.push($scope.newtodo);
 			$scope.newtodo = {};
@@ -109,6 +97,9 @@
 		$scope.editing = undefined;
 		$scope.current = undefined;
 
+		$scope.sortBy = function(x) {
+			$scope.myOrderBy = x;
+		}
 		$scope.save = function () {
 			$scope.editing = angular.copy($scope.editing, $scope.current);
 			$scope.editing = undefined;
@@ -117,111 +108,22 @@
 			$scope.editing = undefined;
 		};
 		$scope.edit = function (x) {
-
-			// var parts = x.date.split('/');
-			// var selectedDate = new Date(parts[2],parts[1]-1,parts[0]);
 			$scope.current = x;
 			$scope.editing = {
-				name: x.name,
+				user: x.user,
 				date: x.date
 			}
-
-			console.log($scope.current);
-			console.log($scope.editing);
 		};
-
 		$scope.delete = function (x) {
 				  var index = $scope.myArray.indexOf(x);
 				  $scope.myArray.splice(index, 1);     
 		};
-
-		$scope.sortByNameAsc = function (x) {
-			console.log($scope.myArray[0][x]);
-			if ($scope.sorting[x]) {
-				console.log("ASC");
-				$scope.myArray.sort(function(a, b) {
-					var nameA = a[x].toLowerCase(), nameB = b[x].toLowerCase() 
-					if (nameA < nameB)
-					return -1 
-					if (nameA > nameB)
-					return 1
-					return 0
-				});
-			} else {
-				console.log("DESC");
-				$scope.myArray.sort(function(a, b) {
-					var nameA = a[x].toLowerCase(), nameB = b[x].toLowerCase() 
-					if (nameA > nameB)
-					return -1 
-					if (nameA < nameB)
-					return 1
-					return 0
-				});
-
-			}
-			$scope.sorting[x] = !$scope.sorting[x];
-		};
-
 
 	});
 
 
 
 
-
-
-
-
-// function sortByNameAsc () { //Функция, которая сортирует по имени. A-Z
-// +    var SortedGoods = Goods.sort(function(a, b) {
-// +        var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase() 
-// +        if (nameA < nameB)
-// +        return -1 
-// +        if (nameA > nameB)
-// +        return 1
-// +        return 0
-// +    });
-// +    createTable(SortedGoods);
-// +};
-// +
-// +function sortByNameDesc () { //Функция, которая сортирует по имени. Z-A
-// +    var SortedGoods = Goods.sort(function(a, b) {
-// +        var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
-// +        if (nameA > nameB)
-// +        return -1 
-// +        if (nameA < nameB)
-// +        return 1
-// +        return 0
-// +    });
-// +    createTable(SortedGoods);
-// +};
-// +
-// +function sortByPriceAsc () { //Функция, которая сортирует по цене. Возрастание.
-// +    var SortedGoods = Goods.sort(function(obj1, obj2) {
-// +        return accounting.unformat(obj1.price).toFixed(2) - accounting.unformat(obj2.price).toFixed(2)//Снимает маску с формата валюты. accounting.unformat - функция, импортированная из внешней библиотеки.
-// +    });
-// +    createTable(SortedGoods);
-// +};
-// +
-// +function sortByPriceDesc () { //Функция, которая сортирует по цене. Убывание.
-// +    var SortedGoods = Goods.sort(function(obj1, obj2) {
-// +        return accounting.unformat(obj2.price).toFixed(2) - accounting.unformat(obj1.price).toFixed(2)
-// +    });
-// Add a comment to this line
-// +    createTable(SortedGoods);
-// +};
-
-	/*
-	$http
-	валидация
-	full day add style
-	name search
-	sorting
-	scroll
-	firebase
-
-
-	*/
 </script>
 </body>
 </html>
