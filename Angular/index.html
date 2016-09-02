@@ -11,10 +11,12 @@
 <body>
 
 <div ng-app="myApp" ng-controller="myCtrl">
-
-	<div class="col-md-8" style="margin:20px;">
-		<form name="addUserForm">
-			<div class="btn-group" style="padding:20px;">
+	
+	
+	<div class="col-md-8" style="padding:20px;">
+		<h1>Super-mega todo application</h1>
+		<form name="addUserForm" style="margin-bottom:20px">
+			<div class="btn-group" style="">
 				<button type="button" class="btn btn-primary" ng-click="add()" ng-disabled="!addUserForm.$valid">Add</button>
 			</div>
 			<input ng-model="newtodo.date" required type="date" name="" placeholder="date" class="form-control" style="width:200px; display:inline" />
@@ -24,6 +26,18 @@
 		<p>Search for the needed result:</p>
 		<input type="text" ng-model="test" class="form-control" style="width:200px; display:inline; margin-bottom:20px">
 
+		<p>Filterh for the needed result:</p>
+		<form style="margin-bottom:20px">
+			<label class="checkbox-inline">
+				<input ng-model="checkbox.done" type="checkbox" value="">Done
+			</label>
+			<label class="checkbox-inline">
+				<input ng-model="checkbox.inProgress" type="checkbox" value="">In progress
+			</label>
+		</form>
+		<tt>value1 = {{checkbox.done}}</tt><br/>
+		<tt>value2 = {{checkbox.inProgress}}</tt><br/>
+
 		<table class="table table-bordered" ng-if="editing === undefined">
 			<thead>
 				<tr><th ng-click="sortBy('date')">Date</th>
@@ -32,7 +46,7 @@
 					<th>Action</th></tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="item in myArray | filter: test | orderBy:myOrderBy" >
+				<tr ng-repeat="item in myArray | filter: test | orderBy:myOrderBy" ng-hide="checkbox.done === true && (item.status ==='in progress' || item.status ==='todo' || item.status ==='partitialy done')" ng-hide="checkbox.done === true && (item.status ==='in progress' || item.status ==='todo' || item.status ==='partitialy done')">
 					<td>{{item.date | date: 'dd/MM/yyyy' }}</td>
 					<td>{{item.user }}</td>
 					<td>{{item.status }}</td>
@@ -61,34 +75,21 @@
 
 <script>
 
-
-function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
-
-function makeid() {
-	var text = "";
-	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-	for( var i=0; i < 5; i++ )
-		text += possible.charAt(Math.floor(Math.random() * possible.length));
-	return text;
-}
-
-statusArray = ['todo', 'in progress', 'partitialy done', 'done'];
-randomDates = [];
-
-for (var i = 0; i < 10; i++) {
-	var rand = statusArray[Math.floor(Math.random() * statusArray.length)];
-	randomDates.push({date: randomDate(new Date(2012, 0, 1), new Date()), user: makeid(), status: rand});
-}
-
-console.log(randomDates);
-
 	var app = angular.module('myApp', []);
-	app.controller('myCtrl', function($scope) {
+	app.controller('myCtrl', function($scope, $http) {
+
+		$scope.checkbox = {
+			done: false,
+			inProgress: false
+		};
+
+		$http.get("https://api.myjson.com/bins/3rau8")
+			.then(function(response) {
+				$scope.myArray = response.data;
+			});
+
+
 		$scope.newtodo = {};
-		$scope.myArray = randomDates;
 		$scope.add = function () {
 			$scope.myArray.push($scope.newtodo);
 			$scope.newtodo = {};
@@ -100,6 +101,7 @@ console.log(randomDates);
 		$scope.sortBy = function(x) {
 			$scope.myOrderBy = x;
 		}
+
 		$scope.save = function () {
 			$scope.editing = angular.copy($scope.editing, $scope.current);
 			$scope.editing = undefined;
