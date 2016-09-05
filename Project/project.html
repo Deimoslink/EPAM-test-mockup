@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Bootstrap</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body>
+
+
+	
+<div class="container" ng-app="sortApp" ng-controller="mainController">
+	
+	<div class="alert alert-info">
+		<p>Sort Type: {{ sortType }}</p>
+		<p>Sort Reverse: {{ sortReverse }}</p>
+		<p>Search Query: {{ searchQuery }}</p>
+	</div>
+	
+	<form>
+		<div class="form-group">
+			<div class="input-group">
+				<div class="input-group-addon"><i class="fa fa-search"></i></div>
+				<input type="text" class="form-control" placeholder="Search" ng-model="searchQuery">
+			</div>
+		</div>
+	</form>
+	
+	<table class="table table-bordered table-striped">
+	
+		<thead>
+			<tr>
+				<td>
+					<input type="checkbox" ng-click="selectAll()">
+				</td>
+				<td>
+					<a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+					ID
+						<span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+					</a>
+				</td>
+				<td>
+					<a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse">
+					Title
+						<span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
+					</a>
+				</td>
+				<td>
+					<a href="#" ng-click="sortType = 'author'; sortReverse = !sortReverse">
+					Author
+						<span ng-show="sortType == 'author' && !sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'author' && sortReverse" class="fa fa-caret-up"></span>
+					</a>
+				</td>
+				<td>
+					<a href="#">
+					Duration 
+					</a>
+				</td>
+				<td>
+					<a href="#">
+					Action
+					</a>
+				</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr ng-repeat="item in mainArray | orderBy:sortType:sortReverse | filter:searchQuery">
+				<td>
+					<input type="checkbox" ng-model="item.selected">
+				</td>
+				<td>{{ item.id }}</td>
+				<td>{{ item.title }}</td>
+				<td>{{ item.author }}</td>
+				<td>{{ item.duration }}</td>
+				<td>
+					<button type="button" class="btn btn-success btn-xs" ng-click="save()">Save</button>
+					<button type="button" class="btn btn-danger btn-xs" ng-click="cancel()">Cancel</button>
+				</td>
+			</tr>
+		</tbody>
+	
+	</table>
+	
+</div>
+	
+
+
+
+<script>
+
+angular.module('sortApp', [])
+
+.controller('mainController', function($scope) {
+	$scope.sortType = 'name'; // set the default sort type
+	$scope.sortReverse= false;// set the default sort order
+	$scope.searchQuery = ''; // set the default search/filter term
+
+		// create the list of sushi rolls 
+	$scope.mainArray = [
+		{ id: 1, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
+		{ id: 2, title: "title", author: "author", duration: "lol", url: "http://url", archived: false},
+		{ id: 3, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
+		{ id: 4, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
+		{ id: 5, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
+		{ id: 6, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
+		{ id: 7, title: "title", author: "author", duration: "duration", url: "http://url", archived: false}
+	];
+
+	$scope.save = function() {
+		console.log("save");
+	};
+
+	$scope.cancel = function() {
+		console.log("cancel");
+	};
+
+	$scope.selectAll = function() {
+		$scope.mainArray.forEach(function(item) {
+			item.selected = true;
+		})
+	}
+});
+
+
+
+
+
+</script>
+</body>
+</html>
+
+
