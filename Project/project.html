@@ -30,7 +30,7 @@
 		</div>
 	</header>
 	
-<div class="container">
+<div class="container" ng-if="render === 'table'">
 	
 
 	<h1>Courses</h1>
@@ -49,7 +49,7 @@
 
 	<div class="button-wrapper">
 		<button class="btn btn-default" ng-click="archive()" ng-disabled="!archivable">Archive Selected</button>
-		<button class="btn btn-default">Add New</button>
+		<button class="btn btn-default" ng-click="addNew()">Add New</button>
 	</div>
 </div>
 	
@@ -58,7 +58,7 @@
 		<thead>
 			<tr>
 				<td class="column1">
-					<input type="checkbox" ng-click="selectAll()">
+					<input type="checkbox" ng-click="toggleAll()">
 				</td>
 				<td class="column2">
 					<a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
@@ -97,30 +97,49 @@
 		<tbody>
 			<tr ng-repeat="item in mainArray | orderBy:sortType:sortReverse | filter:searchQuery">
 				<td>
-					<input type="checkbox" ng-model="item.selected" ng-change="searchForArhivable()">
+					<input type="checkbox" ng-model="item.selected" ng-change="searchForArchivable()">
 				</td>
 				<td>{{ item.id }}</td>
 				<td>{{ item.title }}</td>
 				<td>{{ item.author }}</td>
 				<td>{{ item.duration }}</td>
 				<td>
-					<a href="#">Edit</a>
-					<a href="#">Delete</a>
-<!-- 					<button type="button" class="btn btn-success btn-xs" ng-click="save()">Save</button>
-					<button type="button" class="btn btn-danger btn-xs" ng-click="cancel()">Cancel</button> -->
+					<a ng-show="!item.archived" href="#">Edit</a>
+					<a ng-show="!item.archived" href="#" ng-click="delete(item)">Delete</a>
+					<a ng-show="item.archived" href="#" ng-click="unarchive(item)">Unarchive</a>
 				</td>
 			</tr>
 		</tbody>
 	
 	</table>
-	
-	<div class="alert alert-info">
-		<p>Sort Type: {{ sortType }}</p>
-		<p>Sort Reverse: {{ sortReverse }}</p>
-		<p>Search Query: {{ searchQuery }}</p>
-	</div>
+
+</div>
 
 
+<div class="add-form" ng-if="render === 'addition'">
+	<form>
+		<h1>Add new course</h1>
+		<div class="form-group">
+			<label for="course-title">Course Title *</label>
+			<input type="text" class="form-control" id="course-title">
+		</div>
+		<div class="form-group">
+			<label for="course-link">Course Title *</label>
+			<input type="text" class="form-control" id="course-link">
+		</div>
+		<div class="form-group">
+			<label for="course-author">Course Author *</label>
+			<input type="text" class="form-control" id="course-author">
+		</div>
+		<div class="form-group">
+			<label for="course-duration">Course Duration</label>
+			<input type="text" class="form-control" id="course-duration">
+		</div>
+		<div class="button-wrapper">
+			<button class="btn btn-default">Add</button>
+			<button class="btn btn-default" ng-click="cancel()">Cancel</button>
+		</div>
+	</form>
 </div>
 	
 </div>
@@ -130,21 +149,35 @@
 
 angular.module('sortApp', [])
 
-.controller('mainController', function($scope) {
-	$scope.sortType = 'name'; // set the default sort type
-	$scope.sortReverse= false;// set the default sort order
-	$scope.searchQuery = ''; // set the default search/filter term
+.controller('mainController', function($scope,$http) {
+	$scope.sortType = 'name';
+	$scope.sortReverse= false;
+	$scope.searchQuery = '';
 
-		// create the list of sushi rolls 
-	$scope.mainArray = [
-		{ id: 1, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
-		{ id: 2, title: "title", author: "author", duration: "lol", url: "http://url", archived: false},
-		{ id: 3, title: "title", author: "author", duration: "duration", url: "http://url", archived: true},
-		{ id: 4, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
-		{ id: 5, title: "title", author: "author", duration: "duration", url: "http://url", archived: true},
-		{ id: 6, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
-		{ id: 7, title: "title", author: "author", duration: "duration", url: "http://url", archived: false}
-	];
+	// $scope.mainArray = [
+	// 	{ id: 1, title: "Directives", author: "John", duration: 540, url: "http://url", archived: false},
+	// 	{ id: 2, title: "Filters", author: "Abigale", duration: 600, url: "http://url", archived: false},
+	// 	{ id: 3, title: "MVC", author: "Chris", duration: 750, url: "http://url", archived: false},
+	// 	{ id: 4, title: "Data Binding", author: "Robert", duration: 800, url: "http://url", archived: false},
+	// 	{ id: 5, title: "Controllers", author: "Alexander", duration: 760, url: "http://url", archived: false},
+	// 	{ id: 6, title: "Events", author: "Mitchel", duration: 620, url: "http://url", archived: false},
+	// 	{ id: 7, title: "Validation", author: "Dimitry", duration: 690, url: "http://url", archived: false},
+	// 	{ id: 8, title: "Modules", author: "John", duration: 450, url: "http://url", archived: false},
+	// 	{ id: 9, title: "Scopes", author: "Abigale", duration: 620, url: "http://url", archived: false},
+	// 	{ id: 10, title: "Routing", author: "Chris", duration: 720, url: "http://url", archived: false},
+	// 	{ id: 11, title: "Services", author: "Robert", duration: 640, url: "http://url", archived: false},
+	// 	{ id: 12, title: "Forms", author: "Alexander", duration: 550, url: "http://url", archived: false},
+	// 	{ id: 13, title: "Tables", author: "Mitchel", duration: 1000, url: "http://url", archived: false},
+	// 	{ id: 14, title: "HTTP", author: "Dimitry", duration: 850, url: "http://url", archived: false}
+	// ];
+
+	// var text = JSON.stringify($scope.mainArray);
+	// console.log(text);
+
+	$http.get("https://api.myjson.com/bins/4fv94")
+		.then(function(response) {
+			$scope.mainArray = response.data;
+		});
 
 	$scope.save = function() {
 		console.log("save");
@@ -156,7 +189,7 @@ angular.module('sortApp', [])
 
 	$scope.selected = false;
 
-	$scope.selectAll = function() {
+	$scope.toggleAll = function() {
 		if (!$scope.selected) {
 			$scope.mainArray.forEach(function(item) {
 				item.selected = true;
@@ -171,34 +204,42 @@ angular.module('sortApp', [])
 	}
 
 	$scope.archivable = false;
+	$scope.render = "table";
 
-	$scope.searchForArhivable = function () {
-		$scope.mainArray.some(function(item){
-			if (item.selected && !item.archived) {
-				$scope.archivable = true;
-			} else {
-				$scope.archivable = false;
-			}
-		})
-	}
+	$scope.searchForArchivable = function () {
+		$scope.archivable = $scope.mainArray.some(function(item) {
+			return item.selected && !item.archived;
+		});
+	};
+
 
 	$scope.archive = function() {
 		$scope.mainArray.forEach(function(item) {
 			if (item.selected) {
 				item.archived = true;
-				console.log(item);
 			};
-
 		});
 	}
 
+	$scope.unarchive = function(item) {
+		var index = $scope.mainArray.indexOf(item);
+		$scope.mainArray[index].archived = false;
+	}
 
+	$scope.delete = function (x) {
+		var index = $scope.mainArray.indexOf(x);
+		$scope.mainArray.splice(index, 1);     
+	};
 
+	$scope.addNew = function () {
+		$scope.render = "addition";
+	};
+
+	$scope.cancel = function () {
+		$scope.render = "table";
+	};
 
 });
-
-
-
 
 
 </script>

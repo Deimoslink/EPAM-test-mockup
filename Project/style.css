@@ -82,7 +82,7 @@ header {
 }
 
 .column2 {
-	width:40px;
+	width:50px;
 }
 
 .column3 {
@@ -95,4 +95,9 @@ header {
 
 .column6 {
 	width:120px;
+}
+
+.add-form {
+	width:400px;
+	margin:auto;
 }
