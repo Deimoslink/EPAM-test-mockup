@@ -48,7 +48,7 @@
 	</form>
 
 	<div class="button-wrapper">
-		<button class="btn btn-default" ng-click="archive()" ng-disabled="archived">Archive Selected</button>
+		<button class="btn btn-default" ng-click="archive()" ng-disabled="!archivable">Archive Selected</button>
 		<button class="btn btn-default">Add New</button>
 	</div>
 </div>
@@ -97,7 +97,7 @@
 		<tbody>
 			<tr ng-repeat="item in mainArray | orderBy:sortType:sortReverse | filter:searchQuery">
 				<td>
-					<input type="checkbox" ng-model="item.selected">
+					<input type="checkbox" ng-model="item.selected" ng-change="searchForArhivable()">
 				</td>
 				<td>{{ item.id }}</td>
 				<td>{{ item.title }}</td>
@@ -140,10 +140,10 @@ angular.module('sortApp', [])
 		{ id: 1, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
 		{ id: 2, title: "title", author: "author", duration: "lol", url: "http://url", archived: false},
 		{ id: 3, title: "title", author: "author", duration: "duration", url: "http://url", archived: true},
-		{ id: 4, title: "title", author: "author", duration: "duration", url: "http://url", archived: false, selected: true},
+		{ id: 4, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
 		{ id: 5, title: "title", author: "author", duration: "duration", url: "http://url", archived: true},
 		{ id: 6, title: "title", author: "author", duration: "duration", url: "http://url", archived: false},
-		{ id: 7, title: "title", author: "author", duration: "duration", url: "http://url", archived: false, selected: true}
+		{ id: 7, title: "title", author: "author", duration: "duration", url: "http://url", archived: false}
 	];
 
 	$scope.save = function() {
@@ -170,7 +170,17 @@ angular.module('sortApp', [])
 		}
 	}
 
-	$scope.archived = true;
+	$scope.archivable = false;
+
+	$scope.searchForArhivable = function () {
+		$scope.mainArray.some(function(item){
+			if (item.selected && !item.archived) {
+				$scope.archivable = true;
+			} else {
+				$scope.archivable = false;
+			}
+		})
+	}
 
 	$scope.archive = function() {
 		$scope.mainArray.forEach(function(item) {
