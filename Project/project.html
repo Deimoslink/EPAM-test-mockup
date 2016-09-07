@@ -95,7 +95,7 @@
 		</thead>
 		
 		<tbody>
-			<tr ng-repeat="item in mainArray | orderBy:sortType:sortReverse | filter:searchQuery">
+			<tr ng-repeat="item in mainArray | orderBy:sortType:sortReverse | filter:searchQuery | limitTo: paginationLimit()">
 				<td>
 					<input type="checkbox" ng-model="item.selected" ng-change="searchForArchivable()">
 				</td>
@@ -112,6 +112,9 @@
 		</tbody>
 	
 	</table>
+
+		<button class="btn btn-default" ng-click="showMore()">Show More</button>
+
 
 </div>
 
@@ -238,6 +241,17 @@ angular.module('sortApp', [])
 	$scope.cancel = function () {
 		$scope.render = "table";
 	};
+
+	$scope.shownElements = 5;
+
+	$scope.paginationLimit = function() {
+		return $scope.shownElements;
+	};
+
+	$scope.showMore = function() {
+		$scope.shownElements += 3;
+	};
+
 
 });
 
